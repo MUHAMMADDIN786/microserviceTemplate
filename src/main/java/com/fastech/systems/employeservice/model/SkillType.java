@@ -23,4 +23,6 @@ public class SkillType {
     @JsonIgnore
     private List<Skill> skillList=new ArrayList<>();
 
+
+
 }

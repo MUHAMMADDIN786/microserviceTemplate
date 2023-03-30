@@ -9,4 +9,5 @@ public class SkillDto {
     private Integer skillID;
     private String skillName;
     private String skillDescription;
+    private Integer skillTypeId;
 }

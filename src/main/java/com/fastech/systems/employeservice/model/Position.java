@@ -22,6 +22,4 @@ public class Position {
     @OneToMany(mappedBy = "position",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     @JsonIgnore
     private List<EmployementHistory> employementHistoryList=new ArrayList<>();
-
-
 }
