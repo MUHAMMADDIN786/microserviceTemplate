@@ -23,7 +23,6 @@ public class SkillTypeService {
     }
 
     public SkillType create(SkillTypeDto dto) throws Exception {
-        Employee employee = new Employee();
 
         if(dto.getSkillTypeName().isBlank()){
             throw new Exception("Please Enter Valid skill type");
@@ -42,7 +41,7 @@ public class SkillTypeService {
 
         if (dto.getSkillTypeID() == null)
             throw new Exception("Please mention skillType Id");
-        SkillType entity=repository.findById(dto.getSkillTypeID()).orElseThrow(()-> new Exception("Employee not found for id = "+dto.getSkillTypeID()));
+        SkillType entity=repository.findById(dto.getSkillTypeID()).orElseThrow(()-> new Exception("skillType not found for id = "+dto.getSkillTypeID()));
 
         if(!dto.getSkillTypeName().isBlank()){
             entity.setSkillTypeName(dto.getSkillTypeName());

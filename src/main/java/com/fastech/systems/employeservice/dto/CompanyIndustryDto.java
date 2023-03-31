@@ -6,7 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CompanyIndustryDto {
+    private Integer companyIndustryID;
     private Integer companyID;
-    private String companyName;
-    private String companyDescription;
+    private Integer industryID;
+
 }

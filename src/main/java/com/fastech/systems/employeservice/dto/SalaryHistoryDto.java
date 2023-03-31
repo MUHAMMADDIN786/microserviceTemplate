@@ -10,4 +10,5 @@ public class SalaryHistoryDto {
     private String startDate;
     private String endDate;
     private String amount;
+    private Integer employementHistoryID;
 }

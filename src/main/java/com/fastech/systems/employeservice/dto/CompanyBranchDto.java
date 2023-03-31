@@ -15,4 +15,5 @@ public class CompanyBranchDto {
     private String zip;
     private String countryCode;
     private String phoneNumber;
+    private Integer companyID;
 }
