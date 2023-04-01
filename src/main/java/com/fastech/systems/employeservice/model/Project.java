@@ -18,6 +18,7 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer projectID;
     private String projectName;
+    @Column(columnDefinition="text")
     private String projectDescription;
     private String startDate;
     private String endDate;

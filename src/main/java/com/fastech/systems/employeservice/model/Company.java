@@ -17,6 +17,7 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer companyID;
     private String companyName;
+    @Column(columnDefinition="text")
     private String companyDescription;
     @OneToMany(mappedBy = "company",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     @JsonIgnore

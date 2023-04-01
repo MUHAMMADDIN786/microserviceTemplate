@@ -15,6 +15,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer taskID;
     private String taskName;
+    @Column(columnDefinition="text")
     private String taskDescription;
     @ManyToOne
     @JsonIgnore

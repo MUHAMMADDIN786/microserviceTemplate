@@ -18,6 +18,7 @@ public class SkillType {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer skillTypeID;
     private String skillTypeName;
+    @Column(columnDefinition="text")
     private String skillTypeDescription;
     @OneToMany(mappedBy = "skillType",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     @JsonIgnore

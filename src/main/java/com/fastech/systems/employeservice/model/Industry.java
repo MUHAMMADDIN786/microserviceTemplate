@@ -18,6 +18,7 @@ public class Industry {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer industryID;
     private String industryName;
+    @Column(columnDefinition="text")
     private String industryDescription;
     @OneToMany(mappedBy = "industry",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     @JsonIgnore

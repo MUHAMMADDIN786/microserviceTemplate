@@ -17,6 +17,7 @@ public class CompanyBranch {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer companyBranchID;
     private String branchName;
+    @Column(columnDefinition="text")
     private String branchDescription;
     private String streetAddress;
     private String state;

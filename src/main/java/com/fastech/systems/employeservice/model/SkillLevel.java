@@ -19,6 +19,7 @@ public class SkillLevel {
     private Integer skillLevelID;
     private Integer skillLevelInt;
     private String skillLevelName;
+    @Column(columnDefinition="text")
     private String skillLevelDescription;
     @OneToMany(mappedBy = "skillLevel",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     @JsonIgnore

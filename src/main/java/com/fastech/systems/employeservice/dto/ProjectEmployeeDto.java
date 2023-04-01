@@ -6,7 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProjectEmployeeDto {
-    private Integer companyID;
-    private String companyName;
-    private String companyDescription;
+    private Integer projectEmployeeID;
+    private Integer employeeID;
+    private Integer projectID;
+
 }

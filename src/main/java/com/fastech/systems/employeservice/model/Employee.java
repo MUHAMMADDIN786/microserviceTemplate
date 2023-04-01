@@ -21,8 +21,8 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String middleName;
-    private Date dob;
-    private Double ageCal;
+    private String dob;
+    private Integer ageCal;
     private String streetAddress;
     private String city;
     private String state;

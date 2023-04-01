@@ -11,7 +11,7 @@ public class EmployeeDto {
     private String firstName;
     private String lastName;
     private String middleName;
-    private Date dob;
+    private String dob;
     private Double ageCal;
     private String streetAddress;
     private String city;

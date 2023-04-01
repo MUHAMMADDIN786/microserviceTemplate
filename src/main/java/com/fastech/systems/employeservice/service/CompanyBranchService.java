@@ -25,35 +25,57 @@ public class CompanyBranchService {
     }
     public CompanyBranch create(CompanyBranchDto dto) throws Exception {
 
-        if(dto.getCompanyBranchID()==null) {
+        if(dto.getCompanyID()==null) {
             throw new Exception("Plese enter Valid Company id");
         }
         if(dto.getBranchName().isBlank())
             throw new Exception("Enter branch name");
         if(dto.getCity().isBlank())
             throw new Exception("Enter city name");
-        Company entity= new Company();
-        entity.setCompanyName(dto.getCompanyName());
-        entity.setCompanyDescription(dto.getCompanyDescription());
+        if(dto.getPhoneNumber().isBlank())
+            throw new Exception("Enter city name");
+        if(dto.getStreetAddress().isBlank())
+            throw new Exception("Enter city name");
+        CompanyBranch entity= new CompanyBranch();
+        entity.setBranchName(dto.getBranchName());
+        entity.setCompany(companyService.findById(dto.getCompanyID()));
+        entity.setCity(dto.getCity());
+        entity.setBranchDescription(dto.getBranchDescription());
+        entity.setPhoneNumber(dto.getPhoneNumber());
+        entity.setZip(dto.getZip());
+        entity.setState(dto.getState());
+        entity.setCountryCode(dto.getCountryCode());
+        entity.setStreetAddress(dto.getStreetAddress());
         return repository.save(entity);
     }
-    public Company findById(Integer id) throws Exception {
-        return repository.findById(id).orElseThrow(()-> new Exception("Company not found for id = "+id));
+    public CompanyBranch findById(Integer id) throws Exception {
+        return repository.findById(id).orElseThrow(()-> new Exception("CompanyBranch not found for id = "+id));
     }
-    public Company update(CompanyDto dto) throws Exception {
-        if(dto.getCompanyID()==null){
-            throw new Exception("Enter Valid Company Id");
+    public CompanyBranch update(CompanyBranchDto dto) throws Exception {
+        if(dto.getCompanyBranchID()==null){
+            throw new Exception("Enter Valid CompanyBranch Id");
         }
-        Company entity= findById(dto.getCompanyID());
-        if(!dto.getCompanyName().isBlank())
-            entity.setCompanyName(dto.getCompanyName());
-        if(!dto.getCompanyDescription().isBlank())
-            entity.setCompanyDescription(dto.getCompanyDescription());
-
+        CompanyBranch entity= findById(dto.getCompanyBranchID());
+        if(!dto.getBranchName().isBlank())
+            entity.setBranchName(dto.getBranchName());
+        if(!dto.getBranchDescription().isBlank())
+            entity.setBranchDescription(dto.getBranchDescription());
+        if(dto.getCompanyID()!=null)
+            entity.setCompany(companyService.findById(dto.getCompanyID()));
+        if(!dto.getCity().isBlank())
+            entity.setCity(dto.getCity());
+        if(!dto.getZip().isBlank())
+            entity.setZip(dto.getZip());
+        if(!dto.getState().isBlank())
+            entity.setState(dto.getState());
+        if(!dto.getCountryCode().isBlank())
+            entity.setCountryCode(dto.getCountryCode());
+        if(!dto.getStreetAddress().isBlank())
+            entity.setStreetAddress(dto.getStreetAddress());
         return repository.save(entity);
     }
-    public Company removeUser(Integer id) throws Exception {
-        Company entity = findById(id);
+    public CompanyBranch removeUser(Integer id) throws Exception {
+        CompanyBranch entity = findById(id);
         repository.delete(entity);
         return entity;
     }

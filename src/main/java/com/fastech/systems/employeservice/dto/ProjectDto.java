@@ -12,4 +12,5 @@ public class ProjectDto {
     private String startDate;
     private String endDate;
     private String budget;
+    private Integer companyBranchID;
 }

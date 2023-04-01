@@ -18,6 +18,7 @@ public class Position {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer positionID;
     private String positionName;
+    @Column(columnDefinition="text")
     private String positionDescription;
     @OneToMany(mappedBy = "position",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     @JsonIgnore
