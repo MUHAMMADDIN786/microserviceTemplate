@@ -39,6 +39,19 @@ public class SalaryHistoryController {
             return errorResponse(responseModel, e);
         }
     }
+    @GetMapping("findByEmployementHistoryID")
+    public ResponseEntity<?> findByEmployementHistoryID(@RequestBody PaginationDto paginationDto) {
+        APIResponse<SalaryHistory> responseModel = new APIResponse<>();
+        try {
+            Page<SalaryHistory> list = service.findByEmployementHistoryID(paginationDto);
+            responseModel.setResponse(list.getContent());
+            responseModel.setTotalCount((int) list.getTotalElements());
+            responseModel.setTotalPages(list.getTotalPages());
+            return ResponseEntity.ok(responseModel);
+        } catch (Exception e) {
+            return errorResponse(responseModel, e);
+        }
+    }
     @GetMapping("findById")
     public ResponseEntity<?> findById(@RequestParam(name="id") Integer id) {
         APIResponse<SalaryHistory> responseModel = new APIResponse<>();

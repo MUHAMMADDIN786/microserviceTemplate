@@ -8,4 +8,11 @@ import lombok.Setter;
 public class PaginationDto {
     Integer pageNo;
     Integer pageSize;
+    Integer industryID;
+    Integer companyID;
+    Integer employeeID;
+    Integer skillID;
+    Integer projectID;
+    Integer companyBranchID;
+    Integer employementHistoryID;
 }

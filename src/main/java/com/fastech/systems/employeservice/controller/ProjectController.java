@@ -7,6 +7,7 @@ import com.fastech.systems.employeservice.global.APIResponse;
 import com.fastech.systems.employeservice.model.Employee;
 import com.fastech.systems.employeservice.model.Project;
 import com.fastech.systems.employeservice.service.EmployeeService;
+import com.fastech.systems.employeservice.service.ProjectEmloyeeService;
 import com.fastech.systems.employeservice.service.ProjectService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +26,40 @@ public class ProjectController {
 
     @Autowired
     private ProjectService service;
+    @Autowired
+    private ProjectEmloyeeService projectEmloyeeService;
 
     @GetMapping("getAll")
     public ResponseEntity<?> getAllData(@RequestBody PaginationDto paginationDto) {
         APIResponse<Project> responseModel = new APIResponse<>();
         try {
             Page<Project> list = service.findAll(paginationDto);
+            responseModel.setResponse(list.getContent());
+            responseModel.setTotalCount((int) list.getTotalElements());
+            responseModel.setTotalPages(list.getTotalPages());
+            return ResponseEntity.ok(responseModel);
+        } catch (Exception e) {
+            return errorResponse(responseModel, e);
+        }
+    }
+    @GetMapping("findAllProjectsByCompanyBranchID")
+    public ResponseEntity<?> findAllProjectsByCompanyBranchID(@RequestBody PaginationDto paginationDto) {
+        APIResponse<Project> responseModel = new APIResponse<>();
+        try {
+            Page<Project> list = projectEmloyeeService.findByEmployeeID(paginationDto);
+            responseModel.setResponse(list.getContent());
+            responseModel.setTotalCount((int) list.getTotalElements());
+            responseModel.setTotalPages(list.getTotalPages());
+            return ResponseEntity.ok(responseModel);
+        } catch (Exception e) {
+            return errorResponse(responseModel, e);
+        }
+    }
+    @GetMapping("findAllProjectsByEmployeeID")
+    public ResponseEntity<?> findAllProjectsByEmployeeID(@RequestBody PaginationDto paginationDto) {
+        APIResponse<Project> responseModel = new APIResponse<>();
+        try {
+            Page<Project> list = service.findAllProjectsByCompanyBranchID(paginationDto);
             responseModel.setResponse(list.getContent());
             responseModel.setTotalCount((int) list.getTotalElements());
             responseModel.setTotalPages(list.getTotalPages());

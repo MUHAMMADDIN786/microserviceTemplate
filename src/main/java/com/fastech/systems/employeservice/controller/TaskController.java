@@ -39,6 +39,19 @@ public class TaskController {
             return errorResponse(responseModel, e);
         }
     }
+    @GetMapping("findTasksByProjectID")
+    public ResponseEntity<?> findTasksByProjectID(@RequestBody PaginationDto paginationDto) {
+        APIResponse<Task> responseModel = new APIResponse<>();
+        try {
+            Page<Task> list = service.findTasksByProjectID(paginationDto);
+            responseModel.setResponse(list.getContent());
+            responseModel.setTotalCount((int) list.getTotalElements());
+            responseModel.setTotalPages(list.getTotalPages());
+            return ResponseEntity.ok(responseModel);
+        } catch (Exception e) {
+            return errorResponse(responseModel, e);
+        }
+    }
     @GetMapping("findById")
     public ResponseEntity<?> findById(@RequestParam(name="id") Integer id) {
         APIResponse<Task> responseModel = new APIResponse<>();

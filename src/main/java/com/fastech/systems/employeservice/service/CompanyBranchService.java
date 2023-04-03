@@ -23,6 +23,11 @@ public class CompanyBranchService {
         Pageable pageable = PageRequest.of(dto.getPageNo(), dto.getPageSize());
         return repository.findAll(pageable);
     }
+
+    public Page<CompanyBranch> findAllByCompanyID(PaginationDto dto) {
+        Pageable pageable = PageRequest.of(dto.getPageNo(), dto.getPageSize());
+        return repository.findAllByCompanyID(dto.getCompanyID(),pageable);
+    }
     public CompanyBranch create(CompanyBranchDto dto) throws Exception {
 
         if(dto.getCompanyID()==null) {

@@ -25,6 +25,10 @@ public class ProjectService {
         Pageable pageable = PageRequest.of(dto.getPageNo(), dto.getPageSize());
         return repository.findAll(pageable);
     }
+    public Page<Project> findAllProjectsByCompanyBranchID(PaginationDto dto) {
+        Pageable pageable = PageRequest.of(dto.getPageNo(), dto.getPageSize());
+        return repository.findAllProjectsByCompanyBranchID(dto.getCompanyBranchID(),pageable);
+    }
     public Project create(ProjectDto dto) throws Exception {
 
         if(dto.getCompanyBranchID()==null){

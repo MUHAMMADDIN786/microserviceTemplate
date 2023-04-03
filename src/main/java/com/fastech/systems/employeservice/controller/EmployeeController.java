@@ -4,7 +4,10 @@ import com.fastech.systems.employeservice.dto.EmployeeDto;
 import com.fastech.systems.employeservice.dto.PaginationDto;
 import com.fastech.systems.employeservice.global.APIResponse;
 import com.fastech.systems.employeservice.model.Employee;
+import com.fastech.systems.employeservice.model.Skill;
 import com.fastech.systems.employeservice.service.EmployeeService;
+import com.fastech.systems.employeservice.service.ProjectEmloyeeService;
+import com.fastech.systems.employeservice.service.SkillEmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,12 +24,42 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService service;
+    @Autowired
+    private SkillEmployeeService skillEmployeeService;
+    @Autowired
+    private ProjectEmloyeeService projectEmloyeeService;
 
     @GetMapping("getAll")
     public ResponseEntity<?> getAllData(@RequestBody PaginationDto paginationDto) {
         APIResponse<Employee> responseModel = new APIResponse<>();
         try {
             Page<Employee> list = service.findAll(paginationDto);
+            responseModel.setResponse(list.getContent());
+            responseModel.setTotalCount((int) list.getTotalElements());
+            responseModel.setTotalPages(list.getTotalPages());
+            return ResponseEntity.ok(responseModel);
+        } catch (Exception e) {
+            return errorResponse(responseModel, e);
+        }
+    }
+    @GetMapping("findEmployeesBySkillID")
+    public ResponseEntity<?> findEmployeesBySkillID(@RequestBody PaginationDto paginationDto) {
+        APIResponse<Employee> responseModel = new APIResponse<>();
+        try {
+            Page<Employee> list = projectEmloyeeService.findByProjectID(paginationDto);
+            responseModel.setResponse(list.getContent());
+            responseModel.setTotalCount((int) list.getTotalElements());
+            responseModel.setTotalPages(list.getTotalPages());
+            return ResponseEntity.ok(responseModel);
+        } catch (Exception e) {
+            return errorResponse(responseModel, e);
+        }
+    }
+    @GetMapping("findEmployeesByProjectID")
+    public ResponseEntity<?> findEmployeesByProjectID(@RequestBody PaginationDto paginationDto) {
+        APIResponse<Employee> responseModel = new APIResponse<>();
+        try {
+            Page<Employee> list = skillEmployeeService.findEmployeesBySkillID(paginationDto);
             responseModel.setResponse(list.getContent());
             responseModel.setTotalCount((int) list.getTotalElements());
             responseModel.setTotalPages(list.getTotalPages());

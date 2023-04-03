@@ -4,6 +4,7 @@ import com.fastech.systems.employeservice.dto.CompanyIndustryDto;
 import com.fastech.systems.employeservice.dto.EmployeeDto;
 import com.fastech.systems.employeservice.dto.PaginationDto;
 import com.fastech.systems.employeservice.global.APIResponse;
+import com.fastech.systems.employeservice.model.Company;
 import com.fastech.systems.employeservice.model.CompanyIndustry;
 import com.fastech.systems.employeservice.model.Employee;
 import com.fastech.systems.employeservice.service.CompanyIndustryService;
@@ -39,6 +40,8 @@ public class CompanyIndustryController {
             return errorResponse(responseModel, e);
         }
     }
+
+
     @GetMapping("findById")
     public ResponseEntity<?> findById(@RequestParam(name="id") Integer id) {
         APIResponse<CompanyIndustry> responseModel = new APIResponse<>();
@@ -52,6 +55,7 @@ public class CompanyIndustryController {
             return errorResponse(responseModel, e);
         }
     }
+
     @DeleteMapping("delete")
     public ResponseEntity<?> delete(@RequestParam(name="id") Integer id) {
         APIResponse<CompanyIndustry> responseModel = new APIResponse<>();

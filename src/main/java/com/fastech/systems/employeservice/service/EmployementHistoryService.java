@@ -25,6 +25,14 @@ public class EmployementHistoryService {
     @Autowired
     private PositionService positionService;
 
+    public Page<EmployementHistory> findByEmployeeID(PaginationDto dto) {
+        Pageable pageable = PageRequest.of(dto.getPageNo(), dto.getPageSize());
+        return repository.findByEmployeeID(dto.getEmployeeID(),pageable);
+    }
+    public Page<EmployementHistory> findByCompanyID(PaginationDto dto) {
+        Pageable pageable = PageRequest.of(dto.getPageNo(), dto.getPageSize());
+        return repository.findByCompanyID(dto.getCompanyID(),pageable);
+    }
     public Page<EmployementHistory> findAll(PaginationDto dto) {
         Pageable pageable = PageRequest.of(dto.getPageNo(), dto.getPageSize());
         return repository.findAll(pageable);

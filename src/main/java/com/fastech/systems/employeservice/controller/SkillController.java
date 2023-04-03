@@ -7,6 +7,7 @@ import com.fastech.systems.employeservice.global.APIResponse;
 import com.fastech.systems.employeservice.model.Employee;
 import com.fastech.systems.employeservice.model.Skill;
 import com.fastech.systems.employeservice.service.EmployeeService;
+import com.fastech.systems.employeservice.service.SkillEmployeeService;
 import com.fastech.systems.employeservice.service.SkillService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +26,27 @@ public class SkillController {
 
     @Autowired
     private SkillService service;
+    @Autowired
+    private SkillEmployeeService skillEmployeeService;
 
     @GetMapping("getAll")
     public ResponseEntity<?> getAllData(@RequestBody PaginationDto paginationDto) {
         APIResponse<Skill> responseModel = new APIResponse<>();
         try {
             Page<Skill> list = service.findAll(paginationDto);
+            responseModel.setResponse(list.getContent());
+            responseModel.setTotalCount((int) list.getTotalElements());
+            responseModel.setTotalPages(list.getTotalPages());
+            return ResponseEntity.ok(responseModel);
+        } catch (Exception e) {
+            return errorResponse(responseModel, e);
+        }
+    }
+    @GetMapping("findSkillsByEmployeeID")
+    public ResponseEntity<?> findSkillsByEmployeeID(@RequestBody PaginationDto paginationDto) {
+        APIResponse<Skill> responseModel = new APIResponse<>();
+        try {
+            Page<Skill> list = skillEmployeeService.findSkillsByEmployeeID(paginationDto);
             responseModel.setResponse(list.getContent());
             responseModel.setTotalCount((int) list.getTotalElements());
             responseModel.setTotalPages(list.getTotalPages());

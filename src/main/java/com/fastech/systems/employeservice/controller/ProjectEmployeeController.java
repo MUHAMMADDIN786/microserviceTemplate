@@ -26,7 +26,7 @@ public class ProjectEmployeeController {
     @Autowired
     private ProjectEmloyeeService service;
 
-    @GetMapping("getAll")
+        @GetMapping("getAll")
     public ResponseEntity<?> getAllData(@RequestBody PaginationDto paginationDto) {
         APIResponse<ProjectEmployee> responseModel = new APIResponse<>();
         try {
@@ -39,6 +39,7 @@ public class ProjectEmployeeController {
             return errorResponse(responseModel, e);
         }
     }
+
     @GetMapping("findById")
     public ResponseEntity<?> findById(@RequestParam(name="id") Integer id) {
         APIResponse<ProjectEmployee> responseModel = new APIResponse<>();

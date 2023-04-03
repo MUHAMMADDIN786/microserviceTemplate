@@ -24,6 +24,10 @@ public class SalaryHistoryService {
         Pageable pageable = PageRequest.of(dto.getPageNo(), dto.getPageSize());
         return repository.findAll(pageable);
     }
+    public Page<SalaryHistory> findByEmployementHistoryID(PaginationDto dto) {
+        Pageable pageable = PageRequest.of(dto.getPageNo(), dto.getPageSize());
+        return repository.findByEmployementHistoryID(dto.getEmployementHistoryID(),pageable);
+    }
     public SalaryHistory create(SalaryHistoryDto dto) throws Exception {
 
         if(dto.getEmployementHistoryID()==null){

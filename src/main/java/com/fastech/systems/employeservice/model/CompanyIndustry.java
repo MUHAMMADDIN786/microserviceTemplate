@@ -14,7 +14,7 @@ import java.util.Date;
 public class CompanyIndustry {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer employeeID;
+    private Integer companyIndustryID;
     @ManyToOne
     @JsonIgnore
     private Company company;

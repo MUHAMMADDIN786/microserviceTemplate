@@ -4,8 +4,10 @@ import com.fastech.systems.employeservice.dto.EmployeeDto;
 import com.fastech.systems.employeservice.dto.IndustryDto;
 import com.fastech.systems.employeservice.dto.PaginationDto;
 import com.fastech.systems.employeservice.global.APIResponse;
+import com.fastech.systems.employeservice.model.Company;
 import com.fastech.systems.employeservice.model.Employee;
 import com.fastech.systems.employeservice.model.Industry;
+import com.fastech.systems.employeservice.service.CompanyIndustryService;
 import com.fastech.systems.employeservice.service.EmployeeService;
 import com.fastech.systems.employeservice.service.IndustryService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,12 +27,28 @@ public class IndustryController {
 
     @Autowired
     private IndustryService service;
+    @Autowired
+    private CompanyIndustryService companyIndustryService;
+
 
     @GetMapping("getAll")
     public ResponseEntity<?> getAllData(@RequestBody PaginationDto paginationDto) {
         APIResponse<Industry> responseModel = new APIResponse<>();
         try {
             Page<Industry> list = service.findAll(paginationDto);
+            responseModel.setResponse(list.getContent());
+            responseModel.setTotalCount((int) list.getTotalElements());
+            responseModel.setTotalPages(list.getTotalPages());
+            return ResponseEntity.ok(responseModel);
+        } catch (Exception e) {
+            return errorResponse(responseModel, e);
+        }
+    }
+    @GetMapping("findAllIndustriesByCompanyID")
+    public ResponseEntity<?> findAllIndustriesByCompanyID(@RequestBody PaginationDto paginationDto) {
+        APIResponse<Industry> responseModel = new APIResponse<>();
+        try {
+            Page<Industry> list = companyIndustryService.findAllIndustriesByCompanyID(paginationDto);
             responseModel.setResponse(list.getContent());
             responseModel.setTotalCount((int) list.getTotalElements());
             responseModel.setTotalPages(list.getTotalPages());

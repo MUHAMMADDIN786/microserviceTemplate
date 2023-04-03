@@ -39,6 +39,19 @@ public class CompanyBranchController {
             return errorResponse(responseModel, e);
         }
     }
+    @GetMapping("findAllByCompanyID")
+    public ResponseEntity<?> findAllByCompanyID(@RequestBody PaginationDto paginationDto) {
+        APIResponse<CompanyBranch> responseModel = new APIResponse<>();
+        try {
+            Page<CompanyBranch> list = service.findAllByCompanyID(paginationDto);
+            responseModel.setResponse(list.getContent());
+            responseModel.setTotalCount((int) list.getTotalElements());
+            responseModel.setTotalPages(list.getTotalPages());
+            return ResponseEntity.ok(responseModel);
+        } catch (Exception e) {
+            return errorResponse(responseModel, e);
+        }
+    }
     @GetMapping("findById")
     public ResponseEntity<?> findById(@RequestParam(name="id") Integer id) {
         APIResponse<CompanyBranch> responseModel = new APIResponse<>();

@@ -2,13 +2,18 @@ package com.fastech.systems.employeservice.service;
 
 import com.fastech.systems.employeservice.dto.PaginationDto;
 import com.fastech.systems.employeservice.dto.TaskDto;
+import com.fastech.systems.employeservice.model.ProjectEmployee;
 import com.fastech.systems.employeservice.model.Task;
 import com.fastech.systems.employeservice.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TaskService {
@@ -22,6 +27,11 @@ public class TaskService {
         Pageable pageable = PageRequest.of(dto.getPageNo(), dto.getPageSize());
         return repository.findAll(pageable);
     }
+    public Page<Task> findTasksByProjectID(PaginationDto dto) {
+        Pageable pageable = PageRequest.of(dto.getPageNo(), dto.getPageSize());
+        return repository.findTasksByProjectID(dto.getProjectID(),pageable);
+    }
+
     public Task create(TaskDto dto) throws Exception {
 
         if(dto.getTaskName().isBlank()){
